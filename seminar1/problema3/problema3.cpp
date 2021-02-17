@@ -40,6 +40,7 @@ int main()
         p = strtok(NULL, separator);
     }
     sortare(sentance,siz);
-
+    for(int i=0;i<siz;i++)
+        printf("%s\n", sentance[i]);
     return 0;
 }
