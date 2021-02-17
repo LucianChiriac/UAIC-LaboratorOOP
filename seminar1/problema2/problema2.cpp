@@ -5,9 +5,15 @@ using namespace std;
 
 //atoi
 
-//read file
-
 int main()
 {
-
+    //read file
+    FILE * file;
+    file = fopen ("ini.txt","r");
+    while(!feof(file))
+    {
+        char line[255] = "";
+        fgets(line,sizeof(line), file);
+        cout << line << endl;
+    }
 }
