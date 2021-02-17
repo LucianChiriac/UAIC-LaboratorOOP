@@ -14,7 +14,6 @@ int a_to_i(char s[])
         }
     }
     nr = s[0]=='-' ? -nr : nr;
-    cout << s << ' ' << nr  << endl;
     return nr;
 }
 
@@ -30,4 +29,6 @@ int main()
         fgets(line,sizeof(line), file);
         sum += a_to_i(line);
     }
+    printf("%d\n", sum);
+    return 0;
 }
