@@ -6,7 +6,7 @@ char* Student::get_name()
 }
 void Student::set_name(char* name)
 {
-
+    this->name = name;
 }
 float& Student::get_mathematics()
 {
@@ -14,7 +14,9 @@ float& Student::get_mathematics()
 }
 void Student::set_mathematics(float x)
 {
-
+    if(x<1 || x>10)
+        return;
+    this->mathematics = x;
 }
 float& Student::get_english()
 {
@@ -22,7 +24,9 @@ float& Student::get_english()
 }
 void Student::set_english(float x)
 {
-
+    if(x<1 || x>10)
+        return;
+    this->english = x;
 }
 float& Student::get_history()
 {
@@ -30,7 +34,9 @@ float& Student::get_history()
 }
 void Student::set_history(float x)
 {
-
+    if(x<1 || x>10)
+        return;
+    this->history = x;
 }
 float Student::Average()
 {
