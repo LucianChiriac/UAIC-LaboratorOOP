@@ -1,8 +1,8 @@
 #include <iostream>
 #include "functions.h"
-#include "Students.h"
+#include "Student.h"
 
 int main()
 {
-    
+
 }
