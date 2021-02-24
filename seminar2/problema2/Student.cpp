@@ -1,15 +1,10 @@
 #include "Student.h"
 
-Student::Student()
-{
-
-}
-
-char* Student::get_name()
+std::string Student::get_name()
 {
     return this->name;
 }
-void Student::set_name(char* name)
+void Student::set_name(string name)
 {
     this->name = name;
 }

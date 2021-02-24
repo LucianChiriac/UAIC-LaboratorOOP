@@ -1,3 +1,5 @@
+#pragma once
 #include "Student.h"
 
-compare_name(Student&,Student&);
+
+bool compare_name(Student s1, Student s2);
