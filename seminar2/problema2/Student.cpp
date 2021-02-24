@@ -1,5 +1,10 @@
 #include "Student.h"
 
+Student::Student()
+{
+
+}
+
 char* Student::get_name()
 {
     return this->name;

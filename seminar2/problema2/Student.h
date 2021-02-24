@@ -5,6 +5,7 @@ class Student
     float english;
     float history;
 public:
+    Student();
     char* get_name();
     void set_name(char* name);
     float& get_mathematics();
