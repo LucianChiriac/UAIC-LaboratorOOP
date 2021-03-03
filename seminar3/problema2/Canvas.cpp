@@ -55,3 +55,26 @@ void Canvas::SetPoint(int x,int y, char ch)
 {
     this->matrix[x][y] = ch;
 }
+
+void Canvas::FillRect(int left, int top, int right, int bottom, char ch)
+{
+    for(int i=top;i<=bottom;i++)
+    {
+    
+        for(int j=left;j<=right;j++)
+        {
+            this->matrix[i][j] = ch;
+
+        }
+    }
+}
+
+void Canvas::DrawRect(int left, int top, int right, int bottom, char ch)
+{
+
+    for(int i=top;i<=bottom;i++)
+        this->matrix[i][left]=this->matrix[i][right]=ch;
+    for(int j=left;j<=right;j++)
+        this->matrix[top][j]=this->matrix[bottom][j]=ch;
+
+}
