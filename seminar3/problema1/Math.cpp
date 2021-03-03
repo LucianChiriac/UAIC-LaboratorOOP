@@ -17,3 +17,22 @@ int Math::Add(double a,double b,double c)
 {
     return (int)(a+b+c);
 }
+
+int Math::Mul(int a,int b)
+{
+    return (a*b);
+}
+
+int Math::Mul(int a,int b,int c)
+{
+    return (a*b*c);
+}
+
+int Math::Mul(double a,double b)
+{
+    return (int)(a*b);
+}
+int Math::Mul(double a,double b,double c)
+{
+    return (int)(a*b*c);
+}
