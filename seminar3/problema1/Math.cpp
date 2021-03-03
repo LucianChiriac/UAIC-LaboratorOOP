@@ -50,3 +50,10 @@ int Math::Add(int count, ...)
     va_end(args);
     return sum;
 }
+
+char* Math::Add(const char *a, const char *b)
+{
+    if(a==nullptr || b==nullptr)
+        return nullptr;
+    return "test";
+}
