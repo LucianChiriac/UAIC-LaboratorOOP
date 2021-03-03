@@ -62,13 +62,16 @@ char* Math::Add(const char *a, const char *b)
     int len1 = strlen(a);
     int len2 = strlen(b);
     char *str = new char[len1+len2+10];
-
+    cout << a << ' ' << b <<  endl;
     for(int i=0;i<len1;i++)
-    {   
         str[i]=a[i];
-    }
+
     for(int i=len1;i<len1+len2;i++)
-        str[i]=b[i];
+    {
+        cout << "B: " << b[i] << '\n';
+        str[i]=b[i-len1];
+    }
+
     str[len1+len2] = '\0';
     return str;
 }

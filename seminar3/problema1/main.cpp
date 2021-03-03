@@ -14,7 +14,7 @@ int main()
     cout << "Inmultesc 2 double: " << Math::Mul(1.2,2.0) << '\n';
     cout << "Inmultesc 3 doubel: " << Math::Mul(1.2,2.0,5.3) << '\n';
     cout << "Inmultesc x inturi: " << Math::Add(6,1,2,3,4,5,30) << '\n';
-    cout << "Adun doua siruri: " << Math::Add("10","20") << '\n';
+    cout << "Adun doua siruri: " << Math::Add("10","24235230") << '\n';
 
     //linux debug
     cout << '\n';
