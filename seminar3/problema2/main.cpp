@@ -14,6 +14,8 @@ int main()
     c.FillRect(1,1,4,5,'r');
     c.Clear();
     c.DrawRect(1,1,4,5,'l');
+    c.Clear();
+    c.DrawCircle(3,3,2,'a');
     c.Print();
 
     // c.Clear();

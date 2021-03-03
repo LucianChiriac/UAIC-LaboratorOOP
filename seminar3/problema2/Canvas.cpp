@@ -78,3 +78,17 @@ void Canvas::DrawRect(int left, int top, int right, int bottom, char ch)
         this->matrix[top][j]=this->matrix[bottom][j]=ch;
 
 }
+
+void Canvas::FillCircle(int x, int y, int ray, char ch)
+{
+    for(int i=x-ray;i<=x+ray;i++)
+        for(int j=y-ray;j<=y+ray;j++)
+            if((i-ray)*(i-ray)+(j-ray)*(j-ray)<=ray*ray)
+                this->matrix[i][j]=ch;
+}
+
+void Canvas::FillCircle(int x, int y, int ray, char ch)
+{
+    for(int i=x-ray;)
+}
+
