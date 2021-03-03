@@ -36,3 +36,17 @@ int Math::Mul(double a,double b,double c)
 {
     return (int)(a*b*c);
 }
+
+int Math::Add(int count, ...)
+{
+    va_list args;
+    va_start(args, count);
+    int sum=0;
+    for(int i=0;i<count;i++)
+    {
+        int x = va_arg(args,int);
+        sum  += x;
+    }
+    va_end(args);
+    return sum;
+}
