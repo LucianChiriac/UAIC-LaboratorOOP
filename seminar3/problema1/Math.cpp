@@ -1,4 +1,5 @@
 #include "Math.h"
+using namespace std;
 
 int Math::Add(int a,int b)
 {
@@ -9,15 +10,18 @@ int Math::Add(int a,int b,int c)
     return (a+b+c);
 }
 
-int Math::Add(double a,double b)
+double Math::Add(double a,double b)
 {
-    return (int)(a+b);
+    return (a+b)*1.0;
 }
-int Math::Add(double a,double b,double c)
+double Math::Add(double a,double b,double c)
 {
-    return (int)(a+b+c);
+    return (a+b+c);
 }
-
+double Math::Add(int a,double b)
+{
+    return ((a*1.0)+b);
+}
 int Math::Mul(int a,int b)
 {
     return (a*b);
@@ -28,11 +32,11 @@ int Math::Mul(int a,int b,int c)
     return (a*b*c);
 }
 
-int Math::Mul(double a,double b)
+double Math::Mul(double a,double b)
 {
-    return (int)(a*b);
+    return (a*b);
 }
-int Math::Mul(double a,double b,double c)
+double Math::Mul(double a,double b,double c)
 {
     return (int)(a*b*c);
 }
@@ -55,5 +59,16 @@ char* Math::Add(const char *a, const char *b)
 {
     if(a==nullptr || b==nullptr)
         return nullptr;
-    return "test";
+    int len1 = strlen(a);
+    int len2 = strlen(b);
+    char *str = new char[len1+len2+10];
+
+    for(int i=0;i<len1;i++)
+    {   
+        str[i]=a[i];
+    }
+    for(int i=len1;i<len1+len2;i++)
+        str[i]=b[i];
+    str[len1+len2] = '\0';
+    return str;
 }
