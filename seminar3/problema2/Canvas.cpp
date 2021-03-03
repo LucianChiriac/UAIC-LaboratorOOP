@@ -30,21 +30,24 @@ void Canvas::Clear()
 
 void Canvas::DrawLine(int x1, int y1, int x2, int y2, char ch)
 {
-    int dx = x2-x1;
-    int dy = y2-y1;
-    int D = 2*dy-dx;
-    int y=y1;
-    for(int x=x1;x<x2;x++)
+    int y = y1;
+    int w = x2 - x1;
+    int h = y2 - y1;
+    int f = 2*h-w;
+
+    for(int x=x1;x<=x2;x++)
     {
         this->matrix[x][y] = ch;
-        if(D>0)
+        if(f<0)
+        {
+            f += 2*h;
+        }
+        else
         {
             y++;
-            D=D-2*dx;
+            f+=2*(h-w);
         }
-        D=D+2*dy;
     }
-
 
 }
 
