@@ -84,9 +84,9 @@ void Canvas::FillCircle(int x, int y, int ray, char ch)
     for(int i=x-ray;i<=x+ray;i++)
         for(int j=y-ray;j<=y+ray;j++)
         {
-            int x = i-ray;
-            int y = j-ray;
-            if(x*x+y*y<=ray*ray+1)
+            int sX = i-ray;
+            int sY = j-ray;
+            if(sX*sX+sY*sY<=ray*ray+1)
                 this->matrix[i][j]=ch;
         }
 }
@@ -96,9 +96,9 @@ void Canvas::DrawCircle(int x, int y, int ray, char ch)
         for(int i=x-ray;i<=x+ray;i++)
         for(int j=y-ray;j<=y+ray;j++)
         {
-            int x = i-ray;
-            int y = j-ray;
-            if(x*x+y*y==ray*ray+1)
+            int sX = i-ray;
+            int sY = j-ray;
+            if(sX*sX+sY*sY==ray*ray+1)
                 this->matrix[i][j]=ch;
         }
 }
