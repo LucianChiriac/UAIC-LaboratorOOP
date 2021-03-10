@@ -16,7 +16,7 @@ private:
 public:
     // add constuctors
     Sort(int elements, int start, int finish);
-    // Sort()
+    Sort(int *vec);
     Sort(int *vec, int size);
     Sort(int count, ...);
     Sort(char *c);

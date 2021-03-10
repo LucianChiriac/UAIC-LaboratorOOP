@@ -20,7 +20,21 @@ Sort::Sort(int *vec, int size)
         this->v[i] = vec[i];
     }
 }
+Sort::Sort(int *vec)
+{
+    int lastNotNull = 0;
+    int i=0;
+    while(i<1000)
+    {
+        if(vec[i]) lastNotNull=i;
+        i++;
+    }
+    this->size = lastNotNull-1;
+    this->v = new int[this->size+5];
 
+    for(int i=0;i<this->size;i++)
+        this->v[i] = vec[i];
+}
 Sort::Sort(int count, ...)
 {
     this->size=count;
@@ -55,7 +69,6 @@ Sort::Sort(char *c)
 void Sort::InsertSort(bool ascendent) {
     for(int i=1;i<this->size;i++)
     {
-        cout << this->v[i] << '\n';
         int key = this->v[i];
         int j = i-1;
         while((ascendent? key<this->v[j] : key>this->v[j]) && j>=0)
@@ -105,7 +118,6 @@ void Sort::BubbleSort(bool ascendent) {
         {
             if((ascendent ? this->v[i]>this->v[i+1] : this->v[i]<this->v[i+1]))
             {
-                cout << "SWAP: " << this->v[i] << ' ' << this->v[i+1] << '\n';
                 sortat=false;
                 swap(this->v[i], this->v[i+1]);
             }
