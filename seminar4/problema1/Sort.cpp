@@ -59,7 +59,19 @@ void Sort::QuickSort(bool ascendent) {
 
 }
 void Sort::BubbleSort(bool ascendent) {
-
+    bool sortat=true;
+    do{
+        sortat = true;
+        for(int i=0;i<this->size-1;i++)
+        {
+            if((ascendent ? this->v[i]>this->v[i+1] : this->v[i]<this->v[i+1]))
+            {
+                cout << "SWAP: " << this->v[i] << ' ' << this->v[i+1] << '\n';
+                sortat=false;
+                swap(this->v[i], this->v[i+1]);
+            }
+        }
+    }while(!sortat);
 }
 void Sort::Print() {
     for(int i=0;i<this->size;i++)
