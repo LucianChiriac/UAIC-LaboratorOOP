@@ -66,36 +66,34 @@ void Sort::InsertSort(bool ascendent) {
         this->v[j+1]=key;
     }
 }
+void Sort::QuickSort(bool ascendent)
+{
+    this->QuickSort(ascendent, 0, this->size-1);
+}
 
-void Sort::QuickSort(bool ascendent) {
-    int pivot;
-    int low = 0;
-    int high = this->size-1;
-    while(low<high)
+int Sort::partition(bool ascendent,int low, int high)
+{
+    int pivot = this->v[high];
+    int i=(low-1);
+    for(int j=low;j<high;j++)
     {
-        int i=low;
-        int j=high;
-        pivot = this->v[low];
-        while(i<j)
+        if((ascendent ? this->v[j]<pivot : this->v[j]>pivot))
         {
-            while(this->v[j]>pivot)
-                j--;
-            for(this->v[i]=this->v[j];i<j && this->v[i]<=pivot;i++)
-                this->v[i]=this->v[j]
+            i++;
+            swap(this->v[i],this->v[j]);
         }
-
-        this->v[i]=pivot;
-        if(i-low<high-i)
-        {
-            sort(this->v,low, i-1);
-            low = i+1;
-        }else{
-            
-        }
-
     }
+    swap(this->v[i+1],this->v[high]);
+    return (i+1);
+}
 
-
+void Sort::QuickSort(bool ascendent, int low, int high) {
+    if(low<high)
+    {
+        int pi = this->partition(ascendent, low, high);
+        this->QuickSort(ascendent, low, pi-1);
+        this->QuickSort(ascendent, pi+1, high);
+    }
 }
 
 

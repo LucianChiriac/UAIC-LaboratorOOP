@@ -11,7 +11,8 @@ private:
     // add data members
     int* v;
     int size;
-
+    void QuickSort(bool ascendent, int low, int high);
+    int partition(bool ascendent,int low, int high);
 public:
     // add constuctors
     Sort(int elements, int start, int finish);

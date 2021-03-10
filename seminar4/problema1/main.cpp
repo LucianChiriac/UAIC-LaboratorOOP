@@ -9,7 +9,7 @@ int main()
     Sort s {6,756,3,346,435,235,856};
     s.Print();
     cout << endl;
-    s.InsertSort(true);
+    s.QuickSort();
     s.Print();
     cout << '\n';
     return 0;
