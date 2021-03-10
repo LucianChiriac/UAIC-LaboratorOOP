@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <cstdarg>
 #include <cstring>
+#include <algorithm>
 
 class Sort
 {
@@ -10,8 +11,6 @@ private:
     // add data members
     int* v;
     int size;
-    void QuickSort(int low, int high);
-    void partition(int low, int high);
 
 public:
     // add constuctors

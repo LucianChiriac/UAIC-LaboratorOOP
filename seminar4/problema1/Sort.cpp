@@ -68,11 +68,34 @@ void Sort::InsertSort(bool ascendent) {
 }
 
 void Sort::QuickSort(bool ascendent) {
-}
+    int pivot;
+    int low = 0;
+    int high = this->size-1;
+    while(low<high)
+    {
+        int i=low;
+        int j=high;
+        pivot = this->v[low];
+        while(i<j)
+        {
+            while(this->v[j]>pivot)
+                j--;
+            for(this->v[i]=this->v[j];i<j && this->v[i]<=pivot;i++)
+                this->v[i]=this->v[j]
+        }
+
+        this->v[i]=pivot;
+        if(i-low<high-i)
+        {
+            sort(this->v,low, i-1);
+            low = i+1;
+        }else{
+            
+        }
+
+    }
 
 
-void Sort::QuickSort(bool ascendent) {
-    QuickSort(0, this->size,ascendent);
 }
 
 
