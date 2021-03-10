@@ -53,11 +53,29 @@ Sort::Sort(char *c)
 }
 
 void Sort::InsertSort(bool ascendent) {
-    
+    for(int i=1;i<this->size;i++)
+    {
+        cout << this->v[i] << '\n';
+        int key = this->v[i];
+        int j = i-1;
+        while((ascendent? key<this->v[j] : key>this->v[j]) && j>=0)
+        {
+            this->v[j+1]=this->v[j];
+            j--;
+        }
+        this->v[j+1]=key;
+    }
 }
-void Sort::QuickSort(bool ascendent) {
 
+void Sort::QuickSort(bool ascendent) {
 }
+
+
+void Sort::QuickSort(bool ascendent) {
+    QuickSort(0, this->size,ascendent);
+}
+
+
 void Sort::BubbleSort(bool ascendent) {
     bool sortat=true;
     do{
