@@ -11,6 +11,7 @@ Number::Number(const char *value, int base)
     this->value = new char[strlen(value)+3];
     strcpy(this->value,  value);
     this->base=base;
+    this->decimal = this->switchDecimal();
 }
 
 Number::~Number()
@@ -21,10 +22,11 @@ Number::~Number()
 
 void Number::SwitchBase(int newBase)
 {
-    if(this->GetBase()!=10)
-        this->switchDecimal();
-    if(newBase==10)
+    if(this->GetBase()==newBase)
         return;
+    if(newBase==10)
+        this->value=this->buildStringDecimal();
+    else this->switchFromDecimal(newBase);
 }
 void Number::Print()
 {
@@ -47,7 +49,7 @@ int Number::getVal(char c)
     return (int)c-'A'+10;
 }
 
-void Number::switchDecimal()
+int Number::switchDecimal()
 {
     int len = strlen(this->value);
     int power = 1;
@@ -58,24 +60,31 @@ void Number::switchDecimal()
         num += this->getVal(this->value[i])*power;
         power*=base;
     }
-    int poz=0;
-    int cn=num;
-    while(cn)
-    {
-        poz++;
-        cn/=10;
-    }
-    delete this->value;
-    this->value = new char[poz+3];
-    this->value[poz] = '\0';
-    while(poz)
-    {
-        this->value[--poz] = num%10+'0';
-        num/=10;
-    }
-    this->base=10;
-}
-void Number::switchFromDecimat(int base)
-{
+    return num;
 
 }
+void Number::switchFromDecimal(int base)
+{
+cout << "I will  switch";
+}
+char* Number::buildStringDecimal()
+{
+    int len = strlen(this->value);
+    char* base = new char[len+5];
+    int poz = 0;
+    int cn  = this->decimal;
+    while(cn)
+    {
+        base[poz++] = cn%10+'0';
+        cn/=10;
+    }
+    for(int i=0;i<poz/2;i++)
+        swap(base[i],  base[poz-i-1]);
+    base[poz]='\0';
+    return base;
+}
+
+/**
+ * & copiere
+ * && mutare
+ * */

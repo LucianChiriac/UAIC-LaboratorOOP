@@ -19,7 +19,7 @@ int main()
     // n1.Print();
     // n2.Print();
     // n1 = (n2+n3-n1)+n1; // after this n1 will be in base 16
-    n1.SwitchBase(2);
+    n1.SwitchBase(8);
     // n1.Print();
 
     // if (n1>n2) printf("n1 is bigger than n2\n"); else printf("n2 is bigger than n1\n");

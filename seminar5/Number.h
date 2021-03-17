@@ -9,8 +9,11 @@ class Number
 private:
    char *value;
    int base;
-   void switchDecimal();
-   void switchFromDecimat(int base);
+   int decimal;
+   
+   char* buildStringDecimal();
+   int switchDecimal();
+   void switchFromDecimal(int base);
    int getVal(char c);
 public:
 
