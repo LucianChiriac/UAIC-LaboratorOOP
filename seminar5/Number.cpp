@@ -13,7 +13,21 @@ Number::Number(const char *value, int base)
     this->base=base;
     this->decimal = this->switchDecimal();
 }
-
+   
+Number::Number(const int nr)
+{
+    this->base=10;
+    this->decimal=nr;
+    this->value = new char[16];
+    this->value = this->buildStringDecimal();
+}
+Number::Number(const char *value)
+{
+    this->value = new char[strlen(value)+3];
+    strcpy(this->value,  value);
+    this->base=10;
+    this->decimal = this->switchDecimal();
+}
 Number::~Number()
 {
     delete this->value;
@@ -26,7 +40,11 @@ void Number::SwitchBase(int newBase)
         return;
     if(newBase==10)
         this->value=this->buildStringDecimal();
-    else this->switchFromDecimal(newBase);
+    else
+    {
+        this->switchFromDecimal(newBase);
+        this->decimal = this->switchDecimal();    
+    } 
 }
 void Number::Print()
 {
@@ -133,6 +151,69 @@ bool Number::operator==(const Number& B)
 bool Number::operator!=(const Number& B)
 {
     return (this->decimal!=B.decimal);
+}
+
+void Number::operator!()
+{
+    
+    int abase = this->base;
+    this->SwitchBase(2);
+    for(int i=0;i<strlen(this->value);i++)
+        this->value[i]=(this->value[i]=='0' ? '1' : '0');
+    this->SwitchBase(abase);
+}
+
+Number::Number(const Number &tmp)
+{
+    this->value = tmp.value;
+    this->base = tmp.base;
+    this->decimal = tmp.decimal;
+}
+
+Number::Number(const Number &&tmp)
+{
+    delete this->value;
+    int len = strlen(tmp.value);
+    this->value = new char[len+3];
+    strcpy(this->value, tmp.value);
+    this->base = tmp.base;
+    this->decimal = tmp.decimal;
+}
+Number operator+(const Number& A, const Number& B)
+{
+    int val = A.decimal + B.decimal;
+    int base = max(A.base, B.base);
+    Number tmp = val;
+    tmp.SwitchBase(base);
+    return tmp; 
+}
+Number operator+=(const Number& A, const Number& B)
+{
+    int val = A.decimal + B.decimal;
+    int base = max(A.base, B.base);
+    Number tmp = val;
+    tmp.SwitchBase(base);
+    return tmp;
+}
+Number operator-(const Number& A, const Number& B)
+{
+    int val = A.decimal - B.decimal;
+    int base = max(A.base, B.base);
+    Number tmp = val;
+    tmp.SwitchBase(base);
+    return tmp;
+}
+Number operator-=(const Number& A, const Number& B)
+{
+    int val = A.decimal - B.decimal;
+    int base = max(A.base, B.base);
+    Number tmp = val;
+    tmp.SwitchBase(base);
+    return tmp;
+}
+Number operator=(const Number& B)
+{
+    
 }
 /**
  * & copiere
