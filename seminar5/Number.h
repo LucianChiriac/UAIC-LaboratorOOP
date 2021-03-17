@@ -9,7 +9,9 @@ class Number
 private:
    char *value;
    int base;
-
+   void switchDecimal();
+   void switchFromDecimat(int base);
+   int getVal(char c);
 public:
 
    Number(const char * value, int base); // where base is between 2 and 16
