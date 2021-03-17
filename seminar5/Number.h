@@ -1,7 +1,14 @@
 #pragma once
+#include <iostream>
+#include <cstring>
+
+
 class Number
 {
 // add data members
+private:
+   char *value;
+   int base;
 
 public:
 
