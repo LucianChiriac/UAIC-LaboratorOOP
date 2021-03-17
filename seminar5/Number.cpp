@@ -211,10 +211,24 @@ Number operator-=(const Number& A, const Number& B)
     tmp.SwitchBase(base);
     return tmp;
 }
-Number operator=(const Number& B)
+// void Number::operator=(const Number& B)
+// {
+//     this = *B;
+// }
+void Number::operator--()
 {
-    
+    int len = strlen(this->value);
+    for(int i=0;i<len;i++)
+        this->value[i] = this->value[i+1];
+    this->value[len-1]='\0';
+    this->decimal = this->switchDecimal();
 }
+void Number::operator--(int)
+{
+    int len = strlen(this->value);
+    this->value[len-1]='\0';
+}
+
 /**
  * & copiere
  * && mutare

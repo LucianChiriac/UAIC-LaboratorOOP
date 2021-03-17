@@ -3,7 +3,9 @@
 using namespace std;
 
 int main()
+
 {
+
    Number n1("10110010",2);
    Number n2("734",8);
    Number n3("FF",16);
@@ -16,11 +18,11 @@ int main()
 
    n1.Print();
    n2.Print();
-   n1 = (n2+n3-n1)+n1; // after this n1 will be in base 16
-   n1.SwitchBase(2);
-   n1.Print();
+//    n1 = (n2+n3-n1)+n1; // after this n1 will be in base 16
+//    n1.SwitchBase(2);
+//    n1.Print();
 
-   if (n1>n2) printf("n1 is bigger than n2\n"); else printf("n2 is bigger than n1\n");
+//    if (n1>n2) printf("n1 is bigger than n2\n"); else printf("n2 is bigger than n1\n");
 
 //    Number n4=12345; // n4 will be in base 10
 //    n1 = 255; // n1 will be 11111111 (value 255 from base 10 in base 2)

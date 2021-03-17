@@ -40,13 +40,18 @@ public:
    void operator!();
 
    //asign
-   Number operator=(const Number& B);
+   // void operator=(const Number& B);
 
    //subtract, addition
    friend Number operator+(const Number& A, const Number& B);
    friend Number operator+=(const Number& A, const Number& B);
    friend Number operator-(const Number& A, const Number& B);
    friend Number operator-=(const Number& A, const Number& B);
+
+   //decrement
+   void operator--();
+   void operator--(int);
+
 
    //copy & move
    Number(Number &tmp);
