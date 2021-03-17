@@ -40,7 +40,9 @@ public:
    void operator!();
 
    //asign
-   // void operator=(const Number& B);
+   void operator=(const Number& B);
+   void operator=(const int nr);
+   void operator=(const char* value);
 
    //subtract, addition
    friend Number operator+(const Number& A, const Number& B);

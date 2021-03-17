@@ -36,8 +36,6 @@ Number::~Number()
 
 void Number::SwitchBase(int newBase)
 {
-    if(this->GetBase()==newBase)
-        return;
     if(newBase==10)
         this->value=this->buildStringDecimal();
     else
@@ -123,7 +121,29 @@ char* Number::buildStringDecimal()
     base[poz]='\0';
     return base;
 }
+void Number::operator=(const Number& B)
+{
+    this->decimal = B.decimal;
+    this->value = this->buildStringDecimal();
+    this->SwitchBase(this->base);
+}
+void Number::operator=(const char* value)
+{
+    delete this->value;
+    this->value = new char[strlen(value)+5];
+    strcpy(this->value, value);
 
+    int abase=this->base;
+    this->base = 10;
+    this->SwitchBase(abase);
+}
+void Number::operator=(const int nr)
+{
+    this->decimal=nr;
+    int abase=this->base;
+    this->base = 10;
+    this->SwitchBase(abase);
+}
 char Number::operator[](int poz)
 {
     return this->value[poz];
