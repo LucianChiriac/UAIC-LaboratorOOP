@@ -30,7 +30,7 @@ void Number::SwitchBase(int newBase)
 }
 void Number::Print()
 {
-    cout << this->value;
+    cout << this->value<<'\n';
 }
 int  Number::GetDigitsCount()
 {
@@ -106,6 +106,34 @@ char* Number::buildStringDecimal()
     return base;
 }
 
+char Number::operator[](int poz)
+{
+    return this->value[poz];
+}
+bool Number::operator>(const Number& B)
+{
+    return (this->decimal>B.decimal);
+}
+bool Number::operator>=(const Number& B)
+{
+    return (this->decimal>=B.decimal);
+}
+bool Number::operator<(const Number& B)
+{
+    return (this->decimal<B.decimal);
+}
+bool Number::operator<=(const Number& B)
+{
+    return (this->decimal<=B.decimal);
+}
+bool Number::operator==(const Number& B)
+{
+    return (this->decimal==B.decimal);
+}
+bool Number::operator!=(const Number& B)
+{
+    return (this->decimal!=B.decimal);
+}
 /**
  * & copiere
  * && mutare
