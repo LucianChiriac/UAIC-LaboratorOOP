@@ -12,6 +12,7 @@ private:
    int decimal;
    
    char* buildStringDecimal();
+   char reVal(int  n);
    int switchDecimal();
    void switchFromDecimal(int base);
    int getVal(char c);

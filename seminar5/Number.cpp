@@ -63,9 +63,31 @@ int Number::switchDecimal()
     return num;
 
 }
+char Number::reVal(int  n)
+{
+    if(n>=0 && n<=9)
+        return n+'0';
+    return n-10+'A';
+}
 void Number::switchFromDecimal(int base)
 {
-cout << "I will  switch";
+    int poz=0;
+    int cn = this->decimal;
+    char *newbase = new char[strlen(this->value)*2];
+
+    while(cn>0)
+    {
+        newbase[poz++]=reVal(cn%base);
+        cn/=base;
+    }
+    newbase[poz]='\0';
+    this->base = base;
+    int baselen = strlen(newbase);
+    for(int i=0;i<baselen/2;i++)
+        swap(newbase[i], newbase[baselen-i-1]);
+    delete this->value;
+    this->value = new char[baselen+10];
+    this->value = newbase;
 }
 char* Number::buildStringDecimal()
 {
