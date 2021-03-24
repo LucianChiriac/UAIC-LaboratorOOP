@@ -7,8 +7,12 @@ class Circuit{
 private: 
     int length;
     Weather weather;
-    Car* cars;
+    Car** cars;
+    int maxLen = 100;
+    int elements = 0;
+    int *podium;
 public:
+    Circuit();
     void SetLength(int);
     void SetWeather(Weather);
     void AddCar(Car*);

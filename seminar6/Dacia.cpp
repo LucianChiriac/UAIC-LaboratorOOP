@@ -6,7 +6,7 @@ Dacia::Dacia()
     strcpy(this->name, "Dacia");
     this->fuel_capacity = 100;
     this->fuel_consumption = 7;
-    this->avg_speed = 150;
+    this->avg_speed = 80;
 }
 char* Dacia::getName()
 {

@@ -1,14 +1,14 @@
 #pragma once
 #include "Car.h"
 
-class Dacia : public Car {
+class Ford : public Car {
     protected:
         char* name;
         int fuel_capacity;
         int fuel_consumption;
         int avg_speed;
     public:
-        Dacia();
+        Ford();
         char* getName();
         int getFuelCapacity();
         int getFuelConsumption();
