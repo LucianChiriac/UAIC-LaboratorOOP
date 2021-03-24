@@ -1,14 +1,19 @@
 #include <iostream>
+#include <time.h>  
 #include "Dacia.h"
 using namespace std;
 
 
 int main()
 {
+      srand (time(NULL));
       Dacia d;
       cout << d.getName() << endl;
       cout << d.getFuelCapacity() << endl;
       cout << d.getFuelConsumption() << endl;
+      cout << d.getAverageSpeed() << endl;
+      cout << d.Run(Weather::Rain,100) << endl;
+      cout << d.getAverageSpeed() << endl;
 //    Circuit c;
 //    c.SetLength(100);
 //    c.SetWeather(Weather::Rain);

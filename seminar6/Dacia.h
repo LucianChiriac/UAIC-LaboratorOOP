@@ -6,11 +6,14 @@ class Dacia : Car {
         char* name;
         int fuel_capacity;
         int fuel_consumption;
-        Weather avg_speed;
+        int avg_speed;
     public:
         Dacia();
         char* getName();
-        float getFuelCapacity();
-        float getFuelConsumption();
-        float getAverageSpeed();
+        int getFuelCapacity();
+        int getFuelConsumption();
+        int getAverageSpeed();
+        int Run(Weather,int);
+        void setSpeed(Weather);
+
 };

@@ -6,20 +6,40 @@ Dacia::Dacia()
     strcpy(this->name, "Dacia");
     this->fuel_capacity = 100;
     this->fuel_consumption = 7;
+    this->avg_speed = 80;
 }
 char* Dacia::getName()
 {
     return this->name;
 }
-float Dacia::getFuelCapacity()
+int Dacia::getFuelCapacity()
 {
     return this->fuel_capacity;
 }
-float Dacia::getFuelConsumption()
+int Dacia::getFuelConsumption()
 {
     return this->fuel_consumption;
 }
-float Dacia::getAverageSpeed()
+int Dacia::getAverageSpeed()
 {
-    return Car::getAverageSpeed();
+    return this->avg_speed;
+}
+
+void Dacia::setSpeed(Weather type)
+{
+    if(type==Weather::Rain)
+        this->avg_speed = this->avg_speed - rand()%10;
+    else if(type==Weather::Snow)
+        this->avg_speed = this->avg_speed - rand()%20;
+}
+
+int Dacia::Run(Weather type, int len)
+{
+    this->setSpeed(type);
+    int gasNeeded = this->getFuelConsumption()*len;
+    if(gasNeeded>this->getFuelCapacity())
+        return -1;
+    int time = len/this->getAverageSpeed();
+    return time;
+
 }
