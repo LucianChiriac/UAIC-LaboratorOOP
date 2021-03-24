@@ -32,25 +32,22 @@ void Circuit::Race()
 }
 void Circuit::ShowFinalRanks()
 {
-    bool sortat=false;
-    do{
-        sortat=true;
-        for(int i=0;i<elements-1;i++)
-        {
-            for(int j=i+1;j<elements;j++)
-                if(podium[i]<=podium[j])
-                {
-                    swap(podium[i], podium[j]);
-                    swap(cars[i], cars[j]);
-                    sortat=false;
-                }
-        }
-    }while(!sortat);
+    for(int i=0;i<elements-1;i++)
+        for(int j=i+1;j<elements;j++)
+            if(podium[i]>podium[j])
+            {
+                swap(podium[i], podium[j]);
+                swap(cars[i], cars[j]);
+            }
+            
+    cout << "\n---Podium--\n";
     for(int i=0;i<elements;i++)
-        cout << cars[i]->getName() << '\n'; 
+        if(podium[i]>=0)
+            cout << cars[i]->getName() << '\n'; 
 }
 void Circuit::ShowWhoDidNotFinis()
 {
+    cout << "\n---DNF--\n";
     for(int i=0;i<elements;i++)
         if(podium[i]==-1)
             cout << cars[i]->getName() << '\n'; 
