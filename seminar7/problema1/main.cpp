@@ -15,6 +15,7 @@ float operator"" _Fahrenheit(unsigned long long int x)
 int main() {
     float a = 300_Kelvin;
     float b = 120_Fahrenheit;
+    cout << a << ' ' << b << endl;
     cout << '\n';
     return 0;
 }
