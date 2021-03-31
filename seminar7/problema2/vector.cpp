@@ -39,9 +39,9 @@ public:
         this->poz--;
     }
 
-    void insert(const T &a)
+    void insert(int loc, const T &a)
     {
-
+        this->arr[loc]=a;
     }
     int get(const T &a)
     {
@@ -50,5 +50,15 @@ public:
                 return i;
         return -1;
     } 
+    void set(int loc,const T &a)
+    {
+        if(loc<this->poz)
+            return;
+        this->arr[loc]=a;
+    }
+    int count()
+    {
+        return this->poz;
+    }
 
 };
