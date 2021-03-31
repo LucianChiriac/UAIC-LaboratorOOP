@@ -4,12 +4,12 @@ using namespace std;
 
 float operator"" _Kelvin(unsigned long long int x)
 {
-    return x+273.15;
+    return x-273.15;
 }
 
 float operator"" _Fahrenheit(unsigned long long int x)
 {
-    return ((x*1.8)+32);
+    return ((x-32)/1.8);
 }
 
 int main() {
