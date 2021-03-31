@@ -29,6 +29,8 @@
         "filesystem": "cpp",
         "limits": "cpp",
         "locale": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "*.tcc": "cpp",
+        "streambuf": "cpp"
     }
 }
