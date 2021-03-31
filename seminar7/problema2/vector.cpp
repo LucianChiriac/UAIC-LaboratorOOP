@@ -12,11 +12,9 @@ public:
     {
         arr = new T[this->size];
     }
-    int getSize()
-    {
-        return this->size;
-    }
-    void Push(const T &a)
+
+    
+    void push(const T &a)
     {
         if(this->poz>=this->size)
         {
@@ -25,12 +23,32 @@ public:
         }
         this->arr[this->poz++]=a;
     }
-    T& Pop()
+    
+    T& pop()
     {
-        return this->arr[this->poz];
+        return this->arr[this->poz-1];
     }
-    T& get()
+    
+    void remove(const int s)
     {
-        return this->arr;
+        if(s>=this->poz)
+            return;
+        for(int i=s;i<this->poz;i++)
+            this->arr[i] = this->arr[i+1];
+        this->arr[this->poz]=0;
+        this->poz--;
     }
+
+    void insert(const T &a)
+    {
+
+    }
+    int get(const T &a)
+    {
+        for(int i=0;i<this->poz;i++)
+            if(a==this->arr[i])
+                return i;
+        return -1;
+    } 
+
 };
