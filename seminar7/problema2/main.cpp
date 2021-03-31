@@ -18,16 +18,15 @@ int main()
     v.push(Ford);
     v.push(Mercedes);
     v.push(Toyota);
-    cout << v.pop().getRezervor();
-    Masini copyMercedes = {50,350};
-    // Vector<int> v;
-    // v.push(100);
-    // v.push(20);
-    // v.push(40);
-    // cout << v.pop() << endl;
-    // cout << v.get(20) << endl;
-    // v.insert(0,69);
-    // v.sort();
+    cout << "Ultima masina are capacititatea: " << v.pop().getRezervor() << '\n';
+    v.insert(0,Mazda);
+    v.sort();
+    Masini Hyundai = {50, 180};
+    v.set(3,Hyundai);
+    cout << "Avem " << v.count() << " masini!\n";
+    v.remove(0);
+    cout << "Marca Hyundai se afla la pozitia " << v.firstIndexOf(Hyundai) << " in vector!\n";
+    cout << "Marca Hyundai are capacitatea rezervorului " << v.get(Hyundai).getPutere() << "!\n";
     cout << '\n';
     return 0;
 }

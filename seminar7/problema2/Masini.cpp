@@ -18,11 +18,11 @@ int Masini::getRezervor() const
 {
     return this->rezervor;
 }
-bool Masini::operator<(Masini& m)
+bool operator<(const Masini& a, const Masini& b)
 {
-    return (this->putere < m.getPutere());
+    return (a.putere < b.getPutere());
 }
-bool Masini::operator==(Masini& a,Masini& b)
+bool operator==(const Masini& a, const Masini& b)
 {
-    return (this->rezervor == m.getRezervor());
+    return (a.rezervor == b.getRezervor());
 }

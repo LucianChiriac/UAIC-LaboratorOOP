@@ -8,6 +8,6 @@ public:
     Masini(int,int);
     int getPutere() const;
     int getRezervor() const;
-    bool operator<(const Masini&);
-    bool operator==(const Masini&);
+    friend bool operator<(const Masini&,const Masini&);
+    friend bool operator==(const Masini&,const Masini&);
 };

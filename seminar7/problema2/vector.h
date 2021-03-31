@@ -36,7 +36,6 @@ public:
             return;
         for(int i=s;i<this->poz;i++)
             this->arr[i] = this->arr[i+1];
-        this->arr[this->poz]=0;
         this->poz--;
     }
 
@@ -83,7 +82,7 @@ public:
     {
         return this->poz;
     }
-    int firstIndexOf(const T &a, bool(*func)(T,T))
+    int firstIndexOf(const T &a, bool(*func)(T,T)=nullptr)
     {
         for(int i=0;i<this->poz;i++)
             if((func==nullptr? this->arr[i]==a : func(a,this->arr[i])))
