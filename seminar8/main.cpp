@@ -4,16 +4,25 @@
 using namespace std;
 ifstream f("file.in");
 
-void splitSentaceIntoWords(const string sentace)
+void splitSentaceIntoWords(string str)
 {
-    cout << sentace << endl;
+    const string separators=" ,?!.";
+    size_t found = str.find_first_of(separators);
+    while(found!=string::npos)
+    {
+        string word = str.substr(0, found); 
+        if(word.length())
+            cout << "WORD: " << word << " with length: " << word.length() << endl;
+        str.erase(0, found+1);
+        found = str.find_first_of(separators);
+    }
+    // cout << sentace << endl;
 }
 
 
 int main()
 {
     string sentace;
-    const string separators=" ,?!.";
     if(f.is_open())
         getline(f, sentace);
     f.close();
