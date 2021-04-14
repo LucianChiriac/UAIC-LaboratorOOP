@@ -13,10 +13,10 @@ struct Compare
     bool operator() (pair<string,int> a, pair<string,int> b)
     {
         if(a.second>b.second)
-            return true;
+            return false;
         if(a.second==b.second && a.first<b.first)
-            return true;
-        return false;
+            return false;
+        return true;
     }
 };
 
@@ -57,11 +57,12 @@ int main()
     {
         sorted_words.push(make_pair(elem.first, elem.second));
     }
-    for(auto elem : sorted_words)
+    while(!sorted_words.empty())
     {
-        cout << elem.first << endl;
+        pair<string,int> word = sorted_words.top();
+        cout << word.first << " => " << word.second << '\n';
+        sorted_words.pop();
     }
-    
 
 
     //linux debug
