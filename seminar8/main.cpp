@@ -2,9 +2,23 @@
 #include <fstream>
 #include <string>
 #include <map>
+#include <queue>
+#include <vector>
 #include <algorithm>
 using namespace std;
 ifstream f("file.in");
+
+struct Compare
+{
+    bool operator() (pair<string,int> a, pair<string,int> b)
+    {
+        if(a.second>b.second)
+            return true;
+        if(a.second==b.second && a.first<b.first)
+            return true;
+        return false;
+    }
+};
 
 void splitSentaceIntoWords(string str, map<string, int>& words)
 {
@@ -16,11 +30,12 @@ void splitSentaceIntoWords(string str, map<string, int>& words)
         if(word.length())
         {
             transform(word.begin(), word.end(), word.begin(), ::tolower);
-            if(words[word]!=0)
+            if(words.count(word) == 0)
             {
-                words[word]++;
-            }else{
                 words[word]=1;
+            }
+            else{
+                words[word]++;
             }
         }
         str.erase(0, found+1);
@@ -32,6 +47,7 @@ void splitSentaceIntoWords(string str, map<string, int>& words)
 int main()
 {
     map<string, int> words;
+    priority_queue<pair<string, int>, vector<pair<string, int>>,Compare> sorted_words;
     string sentace;
     if(f.is_open())
         getline(f, sentace);
@@ -39,8 +55,15 @@ int main()
     splitSentaceIntoWords(sentace, words);
     for(auto elem : words)
     {
-        std::cout << elem.first << " " << elem.second << "\n";
+        sorted_words.push(make_pair(elem.first, elem.second));
     }
+    for(auto elem : sorted_words)
+    {
+        cout << elem.first << endl;
+    }
+    
+
+
     //linux debug
     cout << '\n';
     return 0;
