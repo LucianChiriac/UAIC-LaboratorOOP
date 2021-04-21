@@ -16,7 +16,13 @@ int main()
     }
     m[20] = "result";
     m.Set(40,"result2");
-    m.Delete(20);
+
+
+    Map<int, const char *> map2;
+    map2[10]="OK!";
+    map2[20]="tes2t";
+    m.Includes(map2);
+
     for (auto[key, value, index] : m)
     {
         printf("Index:%d, Key=%d, Value=%s\n", index, key, value);

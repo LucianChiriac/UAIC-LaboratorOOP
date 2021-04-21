@@ -68,7 +68,7 @@ public:
         return false;
     }
 
-    int Count()
+    const int Count()
     {
         return this->count;
     }
@@ -78,7 +78,6 @@ public:
         memset(this->keys,0, sizeof(this->keys)*sizeof(K));
         memset(this->values,0, sizeof(this->values)*sizeof(K));
         this->count=0;
-        // for(int i=0;i<this->count;i++)
     }
 
     bool Delete(const K& key)
@@ -95,6 +94,16 @@ public:
                 return true;
             }
         return false;
+    }
+
+    bool Includes(const Map<K,V>& map) 
+    {
+        if(map.Count() != this->count)
+            return false;
+        for(int i=0;i<map.Count();i++)
+            if(map[this->keys[i]]==nullptr)
+                return false;
+        return true;
     }
 
 
