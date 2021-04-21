@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 
@@ -52,15 +53,50 @@ public:
     {
         arrayLength=100;
         count=0;
-        this->index = new int[arrayLength];
         this->values = new V[arrayLength];
         this->keys = new K[arrayLength];
     }
 
-    void Set(const K& key, const V& value)
+    void Set(const K& key, const V value)
     {
-        // for(int i=0;i<)
+        
     }
+
+    bool Get(const K& key, V& value)
+    {
+
+        return false;
+    }
+
+    int Count()
+    {
+        return this->count;
+    }
+
+    void Clear()
+    {
+        memset(this->keys,0, sizeof(this->keys)*sizeof(K));
+        memset(this->values,0, sizeof(this->values)*sizeof(K));
+        this->count=0;
+        // for(int i=0;i<this->count;i++)
+    }
+
+    bool Delete(const K& key)
+    {
+        for(int i=0;i<this->count;i++)
+            if(this->keys[i]==key)
+            {
+                for(int j=i;j<this->count;j++)
+                {
+                    this->keys[j]=this->keys[j+1];
+                    this->values[j]=this->values[j+1];
+                }
+                this->count--;
+                return true;
+            }
+        return false;
+    }
+
 
     V& operator[](const K& key)
     {
@@ -83,7 +119,6 @@ public:
         this->values[this->count]=nullptr;
         this->count++;
         return this->values[count-1];
-
     }
 
     Iterrator<K,V> begin(){

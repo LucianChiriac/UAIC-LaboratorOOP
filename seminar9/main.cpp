@@ -14,8 +14,9 @@ int main()
     {
         printf("Index:%d, Key=%d, Value=%s\n", index, key, value);
     }
-
     m[20] = "result";
+    m.Set(40,"result2");
+    m.Delete(20);
     for (auto[key, value, index] : m)
     {
         printf("Index:%d, Key=%d, Value=%s\n", index, key, value);
