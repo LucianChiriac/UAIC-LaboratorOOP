@@ -57,18 +57,56 @@ public:
         this->keys = new K[arrayLength];
     }
 
-    void Set(const K& key, const V value)
+    void Set(const K& key, const V& value)
     {
+        for(int i=0;i<count;i++)
+            if(this->keys[i]==key)
+                this->values[i]=value;
         
+        if(this->count==this->arrayLength)
+        {
+            this->arrayLength*=2;
+            K* tmp1 = (K*)realloc(this->keys, this->arrayLength * sizeof(K));
+            V* tmp2 = (V*)realloc(this->values, this->arrayLength * sizeof(V));
+            this->keys=tmp1;
+            this->values=tmp2;
+            delete[] tmp1;
+            delete[] tmp2;
+        }
+
+        this->keys[this->count]=key;
+        this->values[this->count]=value;
+        this->count++;
     }
 
     bool Get(const K& key, V& value)
     {
-
+        for(int i=0;i<this->Count();i++)
+            if(this->keys[i]==key)
+            {
+                value=this->values[i];
+                return true;
+            }
         return false;
     }
+    bool Includes(const Map<K,V>& map) 
+    {
+        if(map.Count() != this->count)
+            return false;
+        for (auto[key, value, index] : map)
+        {
+            bool ok=false;
+            for(int i=0;i<this->Count();i++)
+                if(this->keys[i]==key)
+                    ok=true;
+            if(!ok)
+                return false;
+        }
+        return true;
+    }
 
-    const int Count()
+
+    const int Count() const
     {
         return this->count;
     }
@@ -96,15 +134,7 @@ public:
         return false;
     }
 
-    bool Includes(const Map<K,V>& map) 
-    {
-        if(map.Count() != this->count)
-            return false;
-        for(int i=0;i<map.Count();i++)
-            if(map[this->keys[i]]==nullptr)
-                return false;
-        return true;
-    }
+
 
 
     V& operator[](const K& key)
@@ -130,11 +160,13 @@ public:
         return this->values[count-1];
     }
 
-    Iterrator<K,V> begin(){
+    Iterrator<K,V> begin() const
+    {
         Iterrator<K,V> tmp = {&keys[0], &values[0]};
         return tmp;
     }
-    Iterrator<K,V> end(){
+    Iterrator<K,V> end() const
+    {
         Iterrator<K,V> tmp = {&keys[count], &values[count]};
         return tmp;
     }
