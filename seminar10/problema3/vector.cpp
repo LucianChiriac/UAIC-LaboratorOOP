@@ -12,30 +12,31 @@ MyVector::MyVector(int size)
     this->size=counter;
 }
 
-bool MyVector::Add(int) // return true if the value was added. As a result, the size of the vector increases with one.
+bool MyVector::Add(int x) // return true if the value was added. As a result, the size of the vector increases with one.
 {
-
+    this->vec.push_back(x);
+    return true;
 }
 
 bool MyVector::Delete(int index) // returns true if the value from the index was removed. As a result, the size of the vector decreases with one.
 {
-
+    if(index>(int)this->vec.size())
+        return false;
+    this->vec.erase(this->vec.begin()+index);
+    return true;
 }
 
-void MyVector::Iterate(std::function<void()> &iterateLambda)
+void MyVector::Iterate(int(*func)(int))
 {
-
+    for(int i=0;i<(int)this->vec.size();i++)
+        this->vec[i] = func(this->vec[i]);
 }
-void MyVector::Filter(std::function<void()> &filterLambda)
+void MyVector::Filter(bool(*func)(int))
 {
-
-}
-
-std::function<void()> &MyVector::iterateLambda()
-{
-
-}
-std::function<void()> &MyVector::filterLambda()
-{
-    
+    for(int i=0;i<(int)this->vec.size();i++)
+        if(func(this->vec[i]))
+        {
+            this->Delete(i);
+            i--;
+        }
 }

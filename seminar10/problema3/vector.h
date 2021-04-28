@@ -1,23 +1,16 @@
 #pragma once
-#include <functional>
-#include <algorithm>
+#include <vector>
 
 class MyVector { 
-    int *vec;
-    int size;
-    int counter;
+    std::vector<int> vec;
 
 public:
     MyVector();
-    MyVector(int);
 
     bool Add(int); // return true if the value was added. As a result, the size of the vector increases with one.
     bool Delete(int); // returns true if the value from the index was removed. As a result, the size of the vector decreases with one.
     
-    void Iterate(std::function<void()> &iterateLambda);
-    void Filter(std::function<void()> &filterLambda);
-
-    std::function<void()> &iterateLambda();
-    std::function<void()> &filterLambda();
+    void Iterate(int(*func)(int));
+    void Filter(bool(*func)(int));
 
 };
