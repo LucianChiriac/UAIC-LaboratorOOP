@@ -72,13 +72,17 @@ public:
 
 	const Array<T>& operator+=(const T &newElem) // adauga un element de tipul T la sfarsitul listei si returneaza this
     {
+        if(this->Size>this->Capacity)
+        {
+            
+        }
         *this->List[this->Size++]= newElem;
         return *this;
     }
 
 	const Array<T>& Insert(int index, const T &newElem) // adauga un element pe pozitia index, retureaza this. Daca index e invalid arunca o exceptie
 	{
-        
+
     }
     const Array<T>& Insert(int index, const Array<T> otherArray); // adauga o lista pe pozitia index, retureaza this. Daca index e invalid arunca o exceptie
 	const Array<T>& Delete(int index); // sterge un element de pe pozitia index, returneaza this. Daca index e invalid arunca o exceptie
