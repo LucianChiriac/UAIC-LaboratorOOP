@@ -2,12 +2,15 @@
 #include <iostream>
 using namespace std;
 
-class OutOfBounds : public exception
+class Exception
 {
-	virtual const char* what() const throw()
+	const char* msg;
+public:
+	Exception(const char* s)
 	{
-		return "Index out of bound!";
+		msg = s;
 	}
+	const char* GetMsg(){ return msg; }
 };
 
 class Compare
@@ -38,7 +41,7 @@ public:
 	ArrayIterator& operator -- ()
 	{
 		if(this->Current<=0)
-			throw *(new OutOfBounds);
+			throw Exception("Index of out bounds");
 		this->val--;
 		this->Current--;
 	}
@@ -81,6 +84,8 @@ public:
     }
     ~Array() // destructor
     {
+		for(int i=0;i<this->GetSize();i++)
+			delete this->List[i];
         delete[] this->List;
     }
 	Array(int capacity) // Lista e alocata cu 'capacity' elemente
@@ -91,12 +96,16 @@ public:
             this->List[i]= new T;
         this->Size = 0;
     }
-    Array(const Array<T> &otherArray); // constructor de copiere
+	 // constructor de copiere
+    Array(const Array<T> &otherArray)
+	{
+
+	}
 
 	T& operator[] (int index) // arunca exceptie daca index este out of range
     {
-        if(index>this->Size)
-            throw "Index out of bounds";
+        if(index>this->Size || index<0)
+            throw Exception("Index of out bounds");
         return this->List[index];
     }
 
@@ -107,6 +116,8 @@ public:
         {
 			this->Capacity*=2;
 			T** tmp = (T**)realloc(this->List, this->Capacity*sizeof(T*));
+			if(tmp == NULL)
+				throw Exception("There is no memory left!");
 			this->List = tmp;
         }
         *this->List[this->Size++]= newElem;
@@ -117,7 +128,7 @@ public:
 	const Array<T>& Insert(int index, const T &newElem) 
 	{
 		if(index>this->Size || index<0 || index>this->Capacity)
-			throw *(new OutOfBounds);
+			throw Exception("Index of out bounds");
 		*List[index]=newElem;
 		return *this;
     }
@@ -131,7 +142,7 @@ public:
 	const Array<T>& Delete(int index)
 	{
 		if(index>this->Size || index<0)
-			throw *(new OutOfBounds);
+			throw Exception("Index of out bounds");
 		for(int i=index;i<this->Size-1;i++)
 		{
 			this->List[i] = this->List[i+1];
@@ -161,6 +172,8 @@ public:
 	// sorteaza folosind o functie de comparatie
 	void Sort(int(*compare)(const T&, const T&))
 	{
+		if(!this->GetSize())
+			throw Exception("This list is empty");
 		for(int i=0;i<this->GetSize()-1;i++)
 			for(int j=i+1;j<this->GetSize();j++)
 				if(compare(*this->List[i], *this->List[j]))
@@ -194,7 +207,7 @@ public:
 			else 
 				left = mij+1;
 		}
-		return -1;
+		throw Exception("Element isn't in list!");
 	}
 	//  cauta un element folosind binary search si un comparator
 	int BinarySearch(const T& elem, Compare *comparator)
@@ -215,7 +228,7 @@ public:
 			if(compare(*this->List[i], elem))
 				return i;
 		}
-		return -1;
+		throw Exception("Element isn't in list!");
 	}
 	//  cauta un element folosind un comparator
 	int Find(const T& elem, Compare *comparator)
