@@ -162,10 +162,32 @@ public:
 
 	}
 
+	//default compare
+	static int default_comparator(const T& v1, const T& v2)
+	{
+		return (v1>v2) ? 1 : 0;
+	}
 
-	void Sort(); // sorteaza folosind comparatia intre elementele din T
-	void Sort(int(*compare)(const T&, const T&)); // sorteaza folosind o functie de comparatie
-	void Sort(Compare *comparator); // sorteaza folosind un obiect de comparatie
+	// sorteaza folosind comparatia intre elementele din T
+	void Sort()
+	{
+		this->Sort(default_comparator);
+	} 
+	// sorteaza folosind o functie de comparatie
+	void Sort(int(*compare)(const T&, const T&))
+	{
+		for(int i=0;i<this->GetSize()-1;i++)
+			for(int j=i+1;j<this->GetSize();j++)
+				if(compare(*this->List[i], *this->List[j]))
+				{
+					swap(this->List[i], this->List[j]);
+				}
+	}; 
+	 // sorteaza folosind un obiect de comparatie
+	void Sort(Compare *comparator)
+	{
+		this->Sort(comparator->CompareElements);
+	}
 
 	// functii de cautare - returneaza pozitia elementului sau -1 daca nu exista
 	int BinarySearch(const T& elem); // cauta un element folosind binary search in Array

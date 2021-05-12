@@ -31,6 +31,9 @@ int main()
     {
         cout << *key  <<' ';
     }
+    cout <<'\n';
+    v.Sort();
+    v.Print();
     cout << '\n';
     return 0;
 }
