@@ -34,6 +34,7 @@ int main()
     cout <<'\n';
     v.Sort();
     v.Print();
+    cout << v.BinarySearch(423);
     cout << '\n';
     return 0;
 }

@@ -190,9 +190,32 @@ public:
 	}
 
 	// functii de cautare - returneaza pozitia elementului sau -1 daca nu exista
-	int BinarySearch(const T& elem); // cauta un element folosind binary search in Array
-	int BinarySearch(const T& elem, int(*compare)(const T&, const T&));//  cauta un element folosind binary search si o functie de comparatie
-	int BinarySearch(const T& elem, Compare *comparator);//  cauta un element folosind binary search si un comparator
+	// cauta un element folosind binary search in Array
+	int BinarySearch(const T& elem)
+	{
+		return this->BinarySearch(elem, default_comparator);
+	} 
+	//  cauta un element folosind binary search si o functie de comparatie
+	int BinarySearch(const T& elem, int(*compare)(const T&, const T&))
+	{
+		int left = 0, right=this->GetSize();
+		while(left<=right)
+		{
+			int mij = (left+right)/2;
+			if(*this->List[mij]==elem)
+				return mij;
+			if(compare(*this->List[mij],elem))
+				right = mij-1;
+			else 
+				left = mij+1;
+		}
+		return -1;
+	}
+	//  cauta un element folosind binary search si un comparator
+	int BinarySearch(const T& elem, Compare *comparator)
+	{
+		return this->BinarySearch(elem,comparator->CompareElements);
+	}
 
 	int Find(const T& elem); // cauta un element in Array
 	int Find(const T& elem, int(*compare)(const T&, const T&));//  cauta un element folosind o functie de comparatie
