@@ -35,13 +35,14 @@ public:
 	ArrayIterator& operator ++ ()
 	{
 		this->val+=sizeof(T*);
+		// this->val++;
 		this->Current++;
 		return *this;
 	}
 	ArrayIterator& operator -- ()
 	{
 		if(this->Current<=0)
-			throw Exception("Index of out bounds");
+			throw Exception("Index out of bounds");
 		this->val--;
 		this->Current--;
 	}
@@ -75,6 +76,18 @@ private:
 	int Capacity; // dimensiunea listei de pointeri
 	int Size; // cate elemente sunt in lista
 
+	void reallocateSize(int minSize=0)
+	{
+		do{
+			this->Capacity*=2;
+		}while(this->Capacity<minSize);
+		T** tmp = (T**)realloc(this->List, this->Capacity*sizeof(T*));
+		if(tmp == NULL)
+			throw Exception("There is no memory left!");
+		for(int i=this->Size;i<this->Capacity;i++)
+			tmp[i] = new T;
+		this->List = tmp;
+	}
 public:
 
 	Array() // Lista nu e alocata, Capacity si Size = 0
@@ -99,27 +112,30 @@ public:
 	 // constructor de copiere
     Array(const Array<T> &otherArray)
 	{
-
+		this->Size = otherArray.GetSize();
+		this->Capacity = otherArray.GetCapacity();
+		this->List = new T*[this->Capacity];
+		for(int i=0;i<this->Capacity;i++)
+		{
+			this->List[i] = new T;
+			this->List[i] = otherArray[i];
+		}
+			
 	}
 
-	T& operator[] (int index) // arunca exceptie daca index este out of range
+	// arunca exceptie daca index este out of range
+	T& operator[] (int index) 
     {
         if(index>this->Size || index<0)
-            throw Exception("Index of out bounds");
-        return this->List[index];
+            throw Exception("Index out of bounds");
+        return *this->List[index];
     }
 
 	// adauga un element de tipul T la sfarsitul listei si returneaza this
 	const Array<T>& operator+=(const T &newElem) 
     {
-        if(this->Size>this->Capacity)
-        {
-			this->Capacity*=2;
-			T** tmp = (T**)realloc(this->List, this->Capacity*sizeof(T*));
-			if(tmp == NULL)
-				throw Exception("There is no memory left!");
-			this->List = tmp;
-        }
+        if(this->Size>=this->Capacity)
+			this->reallocateSize();
         *this->List[this->Size++]= newElem;
         return *this;
     }
@@ -128,21 +144,16 @@ public:
 	const Array<T>& Insert(int index, const T &newElem) 
 	{
 		if(index>this->Size || index<0 || index>this->Capacity)
-			throw Exception("Index of out bounds");
+			throw Exception("Index out of bounds");
 		*List[index]=newElem;
 		return *this;
     }
-	// adauga o lista pe pozitia index, retureaza this. Daca index e invalid arunca o exceptie
-    const Array<T>& Insert(int index, const Array<T> otherArray)
-	{
-
-	} 
 	
 	// sterge un element de pe pozitia index, returneaza this. Daca index e invalid arunca o exceptie
 	const Array<T>& Delete(int index)
 	{
 		if(index>this->Size || index<0)
-			throw Exception("Index of out bounds");
+			throw Exception("Index out of bounds");
 		for(int i=index;i<this->Size-1;i++)
 		{
 			this->List[i] = this->List[i+1];
@@ -152,11 +163,6 @@ public:
 		return *this;
 	}
 
-
-	bool operator=(const Array<T> &otherArray)
-	{
-
-	}
 
 	//default compare
 	static int default_comparator(const T& v1, const T& v2)
@@ -172,8 +178,7 @@ public:
 	// sorteaza folosind o functie de comparatie
 	void Sort(int(*compare)(const T&, const T&))
 	{
-		if(!this->GetSize())
-			throw Exception("This list is empty");
+
 		for(int i=0;i<this->GetSize()-1;i++)
 			for(int j=i+1;j<this->GetSize();j++)
 				if(compare(*this->List[i], *this->List[j]))
@@ -242,11 +247,11 @@ public:
 			std::cout << *this->List[i] << ' ';
 		std::cout << '\n';
 	}
-	int GetSize()
+	int GetSize() const
     {
         return this->Size;
     }
-	int GetCapacity()
+	int GetCapacity() const
     {
         return this->Capacity;
     }

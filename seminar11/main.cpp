@@ -4,43 +4,43 @@ using namespace std;
 
 int main()
 {
-    Array<int> v = {100};
+    Array<int> v = {5};
     //get the capacity
     try{
-        cout << v.GetCapacity() << '\n';
-        //add elements to the list
-        v+=100;
-        v+=214;
-        v+=155;
-        v+=423;
-        v+=389;
-        //add variables to the list
-        int x=435;
-        v+=x;
-        //check the list
-        v.Print();
-        cout << '\n';
-
-        //insert at specific location
-        // v.Insert(223,485);
-        v.Print();
-        //delete an element
-        v.Delete(6);
-        v.Print();
-        //for-each loop
+        v+=10;
+        v+=25;
+        v+=30;
+        v+=40;
+        v+=64;
+        v+=978;
+        v+=94;
+        cout << "Foreach print: ";
         for(auto key: v)
         {
-            cout << *key  <<' ';
+            cout << *key << ' ';
         }
-        cout <<'\n';
+        cout << endl;
+        cout << "Al 5lea element este: " << v[4] << '\n';
+        cout << "Modific al 5lea element: ";
+        v.Insert(4,321);
+        v.Print();
+        cout << "Sterg al 5lea element: ";
+        v.Delete(4);
+        v.Print();
+        cout << "Vectorul sortat este: ";
         v.Sort();
         v.Print();
-        cout << v.BinarySearch(423) << '\n';
-        cout << v.Find(155);
-        cout << '\n';
+        cout << "Elementul 94 se afla pe pozitia: ";
+        v.BinarySearch(94);
+        cout << "Find doar daca b=a+10: ";
+        v.Find(10, [](const int& _a,const int& _b) -> int{
+            if(_a+10==_b)
+                return 1;
+            return 0;
+        });
     }catch(Exception e)
     {
-        cout << "[Error] " << e.GetMsg() <<'\n';
+        cout << "\n[Error] " << e.GetMsg() <<'\n';
     }
 
     return 0;
