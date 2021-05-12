@@ -37,14 +37,10 @@ public:
 	}
 	ArrayIterator& operator -- ()
 	{
-		try{
-			if(this->Current<=0)
-				throw *(new OutOfBounds);
-			this->val--;
-			this->Current--;
-		}catch(exception& e){
-			std::cout << "[Error] " << e.what() << '\n';
-		}
+		if(this->Current<=0)
+			throw *(new OutOfBounds);
+		this->val--;
+		this->Current--;
 	}
 
 	bool operator==(ArrayIterator<T> &tmp)
@@ -120,14 +116,9 @@ public:
 	// adauga un element pe pozitia index, retureaza this. Daca index e invalid arunca o exceptie
 	const Array<T>& Insert(int index, const T &newElem) 
 	{
-		try{
-			if(index>this->Size || index<0 || index>this->Capacity)
-				throw *(new OutOfBounds);
-			*List[index]=newElem;
-		}catch(exception& e)
-		{
-			std::cout << "[Error] " << e.what() << '\n'; 
-		}
+		if(index>this->Size || index<0 || index>this->Capacity)
+			throw *(new OutOfBounds);
+		*List[index]=newElem;
 		return *this;
     }
 	// adauga o lista pe pozitia index, retureaza this. Daca index e invalid arunca o exceptie
@@ -139,21 +130,15 @@ public:
 	// sterge un element de pe pozitia index, returneaza this. Daca index e invalid arunca o exceptie
 	const Array<T>& Delete(int index)
 	{
-		try{
-			if(index>this->Size || index<0)
-				throw *(new OutOfBounds);
-			for(int i=index;i<this->Size-1;i++)
-			{
-				this->List[i] = this->List[i+1];
-			}
-			this->List[this->Size]=0;
-			this->Size--;
-		}catch(exception& e)
+		if(index>this->Size || index<0)
+			throw *(new OutOfBounds);
+		for(int i=index;i<this->Size-1;i++)
 		{
-			std::cout << "[Error] " << e.what() << '\n'; 
+			this->List[i] = this->List[i+1];
 		}
+		this->List[this->Size]=0;
+		this->Size--;
 		return *this;
-		
 	}
 
 
@@ -217,9 +202,26 @@ public:
 		return this->BinarySearch(elem,comparator->CompareElements);
 	}
 
-	int Find(const T& elem); // cauta un element in Array
-	int Find(const T& elem, int(*compare)(const T&, const T&));//  cauta un element folosind o functie de comparatie
-	int Find(const T& elem, Compare *comparator);//  cauta un element folosind un comparator
+	// cauta un element in Array
+	int Find(const T& elem)
+	{
+		return this->Find(elem, default_comparator);
+	} 
+	//  cauta un element folosind o functie de comparatie
+	int Find(const T& elem, int(*compare)(const T&, const T&))
+	{
+		for(int i=0;i<this->GetSize();i++)
+		{
+			if(compare(*this->List[i], elem))
+				return i;
+		}
+		return -1;
+	}
+	//  cauta un element folosind un comparator
+	int Find(const T& elem, Compare *comparator)
+	{
+		return this->Find(elem, comparator->CompareElements);
+	}
 
 	void Print()
 	{
