@@ -24,18 +24,19 @@ class ArrayIterator
 {
 private:
 	int Current; // mai adaugati si alte date si functii necesare pentru iterator
+	int size;
 	T* val;
 public:
-	ArrayIterator(T* val)
+	ArrayIterator(T* val,int size)
 	{
 		this->val = val;
 		this->Current=0;
+		this->size=size;
 	}
 
 	ArrayIterator& operator ++ ()
 	{
 		this->val+=sizeof(T*);
-		// this->val++;
 		this->Current++;
 		return *this;
 	}
@@ -49,11 +50,11 @@ public:
 
 	bool operator==(ArrayIterator<T> &tmp)
 	{
-		return this->val==tmp.val;
+		return this->size==this->Current;
 	}
 	bool operator!=(ArrayIterator<T> &tmp)
 	{
-		return !(this->val==tmp.val);
+		return this->val!=tmp.val;
 	}
 
 	T* GetElement()
@@ -62,7 +63,7 @@ public:
 	}
 	T* operator*()
 	{
-		return this->GetElement();
+		return this->val;
 	}
 
 
@@ -81,7 +82,8 @@ private:
 		do{
 			this->Capacity*=2;
 		}while(this->Capacity<minSize);
-		T** tmp = (T**)realloc(this->List, this->Capacity*sizeof(T*));
+		
+		T** tmp = (T**)realloc(this->List,this->Capacity*sizeof(T*));
 		if(tmp == NULL)
 			throw Exception("There is no memory left!");
 		for(int i=this->Size;i<this->Capacity;i++)
@@ -124,7 +126,7 @@ public:
 	}
 
 	// arunca exceptie daca index este out of range
-	T& operator[] (int index) 
+	T& operator[] (int index) const
     {
         if(index>this->Size || index<0)
             throw Exception("Index out of bounds");
@@ -140,6 +142,17 @@ public:
         return *this;
     }
 
+	void operator=(const Array<T>& otherArray)
+	{
+		int oSize = otherArray.GetSize();
+		if(!oSize)
+			throw Exception("Cannot copy an empty list!");
+		if(oSize!=this->Capacity)
+			this->reallocateSize(oSize);
+		for(int i=0;i<oSize;i++)
+			*this->List[i]=otherArray[i];
+		this->Size=oSize;
+	}
 	// adauga un element pe pozitia index, retureaza this. Daca index e invalid arunca o exceptie
 	const Array<T>& Insert(int index, const T &newElem) 
 	{
@@ -258,12 +271,12 @@ public:
 
 	ArrayIterator<T> GetBeginIterator()
 	{
-		ArrayIterator<T> tmp = {this->List[0]};
+		ArrayIterator<T> tmp = {this->List[0],this->Size};
 		return tmp;
 	}
 	ArrayIterator<T> GetEndIterator()
 	{
-		ArrayIterator<T> tmp = {this->List[this->Size]};
+		ArrayIterator<T> tmp = {this->List[this->Size-1], this->Size};
 		return tmp;
 	}
 
