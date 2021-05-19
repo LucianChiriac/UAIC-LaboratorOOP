@@ -2,11 +2,11 @@
 #include "Contact.h"
 #include <string>
 
-class Prieten: Contact {
-    std::string birthDate;
+class Coleg: Contact {
     std::string phoneNumber;
+    std::string workPlace;
     std::string adress;
-
 public:
-    Prieten(std::string,std::string,std::string,std::string);
+    Coleg(std::string,std::string,std::string,std::string);
+
 };
