@@ -2,7 +2,7 @@
 #include "Contact.h"
 #include <string>
 
-class Coleg: Contact {
+class Coleg:public Contact {
     std::string phoneNumber;
     std::string workPlace;
     std::string adress;

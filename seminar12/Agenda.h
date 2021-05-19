@@ -4,12 +4,12 @@
 #include <string>
 
 class Agenda {
-    std::vector<Contact*> agenda;
+    std::vector<Contact> agenda;
 
 public:
     Agenda();
     Contact* searchByName(std::string);
     std::vector<Contact*> getFriendList();
     bool deleteByName(std::string);
-    bool addContact(const Contact&);
+    void addContact(const Contact&);
 };

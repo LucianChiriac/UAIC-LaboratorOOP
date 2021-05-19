@@ -4,9 +4,14 @@ Agenda::Agenda()
 {
 
 }
-Contact* Agenda::searchByName(std::string)
+Contact* Agenda::searchByName(std::string name)
 {
-
+    for(auto idx: this->agenda)
+    {
+        // if(*(idx).name==name)
+        //     return *idx;
+    }
+    return nullptr;
 }
 std::vector<Contact*> Agenda::getFriendList()
 {
@@ -16,7 +21,7 @@ bool Agenda::deleteByName(std::string)
 {
 
 }
-bool Agenda::addContact(const Contact&)
+void Agenda::addContact(const Contact& __contact)
 {
-    
+    this->agenda.push_back(__contact);
 }

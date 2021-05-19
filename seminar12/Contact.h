@@ -2,6 +2,6 @@
 #include <string>
 
 class Contact{
-protected:
+public:
     std::string name;
 };

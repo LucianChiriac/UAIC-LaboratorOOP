@@ -2,7 +2,7 @@
 #include "Contact.h"
 #include <string>
 
-class Prieten: Contact {
+class Prieten:public Contact {
     std::string birthDate;
     std::string phoneNumber;
     std::string adress;
