@@ -1,5 +1,6 @@
 #include "Agenda.h"
 
+
 Agenda::Agenda()
 {
 
@@ -8,20 +9,34 @@ Contact* Agenda::searchByName(std::string name)
 {
     for(auto idx: this->agenda)
     {
-        // if(*(idx).name==name)
-        //     return *idx;
+        if(idx->name==name)
+            return idx;
     }
     return nullptr;
 }
-std::vector<Contact*> Agenda::getFriendList()
-{
 
-}
-bool Agenda::deleteByName(std::string)
+std::vector<Prieten*> Agenda::getFriendList()
 {
-
+    std::vector<Prieten*> prieteni;
+    for(auto idx: this->agenda)
+    {
+        //????
+    }
+    return prieteni;
 }
-void Agenda::addContact(const Contact& __contact)
+bool Agenda::deleteByName(std::string name)
 {
-    this->agenda.push_back(__contact);
+    for(int i=0;i<(int)this->agenda.size();i++)
+    {
+        if(this->agenda[i]->name==name)
+        {
+            this->agenda.erase(this->agenda.begin()+i);
+            return true;
+        }
+    }
+    return false;
+}
+void Agenda::addContact(Contact& __contact)
+{
+    this->agenda.push_back(&__contact);
 }

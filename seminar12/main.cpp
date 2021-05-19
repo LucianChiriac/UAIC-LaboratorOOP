@@ -15,7 +15,16 @@ int main()
     agenda.addContact(p);
     agenda.addContact(c);
     agenda.addContact(cun);
-
+    Contact *test = agenda.searchByName("Bogdan");
+    cout << test->name << '\n';
+    vector<Prieten*> prieteni = agenda.getFriendList();
+    cout << "Prietenii din agenda sunt: ";
+    for(auto idx: prieteni)
+    {
+        cout << idx->name << ' ';
+    }
+    agenda.deleteByName("Cutarescu");
+    cout <<'\n';
     cout << '\n';
     return 0;
 }

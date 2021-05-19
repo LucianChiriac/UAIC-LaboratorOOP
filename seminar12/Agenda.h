@@ -1,15 +1,17 @@
 #pragma once
 #include "Contact.h"
+#include "Prieten.h"
 #include <vector>
 #include <string>
+#include <iostream>
 
 class Agenda {
-    std::vector<Contact> agenda;
+    std::vector<Contact*> agenda;
 
 public:
     Agenda();
     Contact* searchByName(std::string);
-    std::vector<Contact*> getFriendList();
+    std::vector<Prieten*> getFriendList();
     bool deleteByName(std::string);
-    void addContact(const Contact&);
+    void addContact(Contact&);
 };
